@@ -24,15 +24,20 @@ public class ReqresTests extends TestBase {
     @DisplayName("Успешная регистрация пользователя")
     @Test
     void successfulUserRegistration() {
-        userRegistration.setName("ivan");
-        userRegistration.setJob("manager");
-
-        response = reqresClient.userRegistration(userRegistration);
-
-        response.statusCode(201);
-
-        UserRegistrationResponseModel userRegistrationResponseModel = response.extract().as(UserRegistrationResponseModel.class);
-        assertTrue(userRegistrationResponseModel.getName().contains("ivan"));
+        step("Указываем \"name\" и \"job\" перед выполнением запроса", () -> {
+            userRegistration.setName("ivan");
+            userRegistration.setJob("manager");
+        });
+        step("Делаем запрос на регистрацию пользователя", () -> {
+            response = reqresClient.userRegistration(userRegistration);
+        });
+        step("Статус код в ответе равен 200", () -> {
+            response.statusCode(201);
+        });
+        step("Имя переданное в запросе равно имени в ответе", () -> {
+            UserRegistrationResponseModel userRegistrationResponseModel = response.extract().as(UserRegistrationResponseModel.class);
+            assertTrue(userRegistrationResponseModel.getName().contains("ivan"));
+        });
     }
 
     @DisplayName("Успешная авторизация пользователя")
@@ -45,10 +50,10 @@ public class ReqresTests extends TestBase {
         step("Делаем запрос на авторизацию пользователя", () -> {
             response = reqresClient.userLogin(loginRequest);
         });
-        step("Проверяем, что статус код - 200", () -> {
+        step("Статус код в ответе равен 200", () -> {
             response.statusCode(200);
         });
-        step("Проверяем, что в ответе пришел не пустой токен", () -> {
+        step("Токен в ответе не пустой", () -> {
             LoginResponseModel loginResponseModel = response.extract().as(LoginResponseModel.class);
             assertNotNull(loginResponseModel.getToken());
         });

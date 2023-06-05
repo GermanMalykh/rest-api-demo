@@ -8,8 +8,8 @@ import qa.demo.model.LoginRequestModel;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
-import static qa.demo.specs.LoginSpecs.requestSpecification;
-import static qa.demo.specs.LoginSpecs.responseSpecification;
+import static qa.demo.config.RestSpecs.requestSpecification;
+import static qa.demo.config.RestSpecs.responseSpecification;
 
 public class ReqresClient {
 

@@ -1,4 +1,4 @@
-package qa.demo.specs;
+package qa.demo.config;
 
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.specification.RequestSpecification;
@@ -8,7 +8,7 @@ import static io.restassured.RestAssured.with;
 import static io.restassured.filter.log.LogDetail.*;
 import static qa.demo.helpers.CustomAllureListener.withCustomTemplates;
 
-public class LoginSpecs {
+public class RestSpecs {
 
     public static RequestSpecification requestSpecification = with()
             .filter(withCustomTemplates())
