@@ -1,4 +1,4 @@
-package qa.demo.helpers;
+package qa.demo.config;
 
 import io.qameta.allure.restassured.AllureRestAssured;
 

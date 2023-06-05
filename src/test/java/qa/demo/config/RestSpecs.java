@@ -6,7 +6,7 @@ import io.restassured.specification.ResponseSpecification;
 
 import static io.restassured.RestAssured.with;
 import static io.restassured.filter.log.LogDetail.*;
-import static qa.demo.helpers.CustomAllureListener.withCustomTemplates;
+import static qa.demo.config.CustomAllureListener.withCustomTemplates;
 
 public class RestSpecs {
 
