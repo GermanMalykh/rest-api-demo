@@ -31,7 +31,7 @@ public class ReqresTests extends TestBase {
         step("Делаем запрос на регистрацию пользователя", () -> {
             response = reqresClient.userRegistration(userRegistration);
         });
-        step("Статус код в ответе равен 200", () -> {
+        step("Статус код в ответе равен 201", () -> {
             response.statusCode(201);
         });
         step("Имя переданное в запросе равно имени в ответе", () -> {
