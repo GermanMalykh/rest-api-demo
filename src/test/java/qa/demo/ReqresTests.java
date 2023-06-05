@@ -118,7 +118,7 @@ public class ReqresTests {
     }
 
     @Test
-        void registrationUserTest() {
+    void registrationUserTest() {
         String data = "{\"name\": \"morpheus\",\"job\": \"leader\"}";
         given()
                 .log().uri()
