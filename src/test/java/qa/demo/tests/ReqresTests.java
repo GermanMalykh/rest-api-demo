@@ -11,8 +11,10 @@ import qa.demo.model.LoginRequestModel;
 import qa.demo.model.UserRegistrationResponseModel;
 
 import static io.qameta.allure.Allure.step;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static io.restassured.RestAssured.given;
+import static io.restassured.http.ContentType.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static qa.demo.config.CustomAllureListener.withCustomTemplates;
 
 @DisplayName("Запросы к reqres API")
 public class ReqresTests extends TestBase {
@@ -57,6 +59,27 @@ public class ReqresTests extends TestBase {
             LoginResponseModel loginResponseModel = response.extract().as(LoginResponseModel.class);
             assertNotNull(loginResponseModel.getToken());
         });
+    }
+
+    @DisplayName("WebShopTest")
+    @Test
+    void addToCartTest() {
+        ValidatableResponse response =
+                given()
+                        .contentType(URLENC)
+                        .filter(withCustomTemplates())
+                        .log().all()
+                        .cookie("NOPCOMMERCE.AUTH", "F25D8810A23985AC4E63A4ABD76822CEA2440BCC529D15D8C8D6D4078FB4E8C4F2B3DFC1A4E6AB86940D404D873A8A40B1B366C05B89A5479156B5E9BED4F52E7EA9E2D4531B1ACB74D4919D260C4C1A86B4873891C81EBFE48985CBAA62028017F37A5A82F6CD5FE62E731CEB5834DD3328E9CE99755266E38E5B707B5E5AF843B5D7BA7DEE1B8AF4B79DB6177496A1")
+                        .formParam("product_attribute_72_5_18", "53")
+                        .formParam("product_attribute_72_6_19", "54")
+                        .formParam("product_attribute_72_3_20", "57")
+                        .formParam("addtocart_72.EnteredQuantity", "1")
+                        .when()
+                        .post("https://demowebshop.tricentis.com/addproducttocart/details/72/1")
+                        .then()
+                        .log().all();
+        response.statusCode(200);
+        assertEquals(true, response.extract().path("success"));
     }
 
 }
